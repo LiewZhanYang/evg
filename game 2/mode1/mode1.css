@@ -1,0 +1,220 @@
+/* General styles */
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to right, #8e44ad, #3498db);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Game container */
+.game-container {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.game-container:hover {
+  transform: scale(1.02);
+}
+
+/* Title and question */
+h1 {
+  margin-bottom: 20px;
+  font-size: 2.2em;
+  color: #333;
+}
+
+#question {
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* Letter input boxes */
+#word-hint {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.letter-input {
+  width: 35px;
+  height: 35px;
+  font-size: 1.2em;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.letter-input:focus {
+  border-color: #4caf50;
+  transform: scale(1.1);
+}
+
+/* Button styles */
+button {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #4caf50, #45a049);
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(to right, #45a049, #4caf50);
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Feedback message */
+#feedback {
+  margin-top: 20px;
+  font-size: 1.3em;
+  color: #333;
+}
+
+/* Score display */
+#score {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Navigation buttons */
+#next-question,
+#back-button {
+  margin-top: 15px;
+}
+
+#back-button {
+  background: linear-gradient(to right, #ff4d4d, #ff1a1a);
+}
+
+#back-button:hover {
+  background: linear-gradient(to right, #ff1a1a, #ff4d4d);
+}
+
+/* Tips button */
+#get-tips {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #ffcc00, #ffb300);
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#get-tips:hover {
+  background: linear-gradient(to right, #ffb300, #ffcc00);
+  transform: translateY(-2px);
+}
+
+#get-tips:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Summary container */
+#summary-container {
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Final score and wrong questions */
+#final-score {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+#wrong-questions-container {
+  margin-top: 15px;
+  text-align: left;
+}
+
+/* Retry and back buttons */
+#retry-wrong,
+#back-button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #4caf50, #45a049);
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#retry-wrong:hover,
+#back-button:hover {
+  background: linear-gradient(to right, #45a049, #4caf50);
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .letter-input {
+    width: 30px;
+    height: 30px;
+    font-size: 1em;
+  }
+}
+
+#question {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

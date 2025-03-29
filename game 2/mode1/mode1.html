@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mandarin to English - Game</title>
+    <link rel="stylesheet" href="mode1.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>Mandarin to English Game</h1>
+      <div id="question-container">
+        <p id="question"></p>
+        <div id="word-hint"></div>
+
+        <button id="submit-answer">Submit</button>
+      </div>
+      <div id="summary-container" style="display: none">
+        <h2>📊 Game Summary</h2>
+        <p id="final-score"></p>
+        <div id="wrong-questions-container"></div>
+        <button id="retry-wrong">🔄 Retry Wrong Questions</button>
+        <button id="back-button">🏠 Back to Menu</button>
+      </div>
+
+      <p id="feedback"></p>
+      <p id="score"></p>
+      <button id="next-question">Next Question</button>
+      <button id="get-tips">💡 Get Tip</button>
+      <button id="back-button">Back to Menu</button>
+    </div>
+    <script src="mode1.js"></script>
+  </body>
+</html>
