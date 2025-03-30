@@ -1,18 +1,23 @@
 const chunks = [
-  { english: "budding poets", mandarin: "\u65b0\u5174\u8bd7\u4eba" },
-  { english: "adjudge", mandarin: "\u5224\u5b9a" },
-  { english: "adjourned", mandarin: "\u4f11\u4f1a" },
-  { english: "impart", mandarin: "\u4f20\u6388" },
-  { english: "rival", mandarin: "\u7ade\u4e89\u5bf9\u624b" },
-  { english: "synonymous", mandarin: "\u540c\u4e49\u7684" },
-  { english: "pampering", mandarin: "\u6de1\u7231" },
-  { english: "instill", mandarin: "\u704c\u6ce8" },
-  { english: "cultivate", mandarin: "\u57f9\u517b" },
-  { english: "counteract", mandarin: "\u62b5\u6d88" },
-  { english: "stalagmites", mandarin: "\u77f3\u7b1e" },
-  { english: "pillars", mandarin: "\u67f1\u5b50" },
-  { english: "white water rafting", mandarin: "\u6fc0\u6d41\u6f02\u6d41" },
-  { english: "abseiling", mandarin: "\u7ef3\u964d" },
+  { english: "took a cake", mandarin: "成为最杰出或最愚笨的人" },
+  { english: "obsession", mandarin: "痴迷" },
+  { english: "overwhelming", mandarin: "压制" },
+  { english: "outdo", mandarin: "超越" },
+  { english: "carefree", mandarin: "无忧无虑" },
+  { english: "furtive", mandarin: "鬼鬼祟祟" },
+  { english: "tense", mandarin: "紧张" },
+  { english: "keyed up", mandarin: "紧张" },
+  { english: "irritable", mandarin: "烦躁的" },
+  { english: "irrespective", mandarin: "不顾一切" },
+  { english: "wisdom", mandarin: "智慧" },
+  { english: "joint", mandarin: "联合" },
+  { english: "trail", mandarin: "踪迹" },
+  { english: "nostalgia", mandarin: "怀旧之情" },
+  { english: "blind man buff", mandarin: "盲抓游戏" },
+  { english: "rankled", mandarin: "生气的" },
+  { english: "pleaded", mandarin: "恳求" },
+  { english: "appease", mandarin: "安抚" },
+  { english: "blindfolded", mandarin: "蒙住眼睛" },
 ];
 
 let currentQuestionIndex = 0;
@@ -37,6 +42,9 @@ const backButton = document.getElementById("back-button");
 backButton.addEventListener("click", () => {
   window.location.href = "../menu/menu.html"; // Go back to the main menu
 });
+
+// Retry button event listener
+retryButton.addEventListener("click", retryWrongQuestions);
 
 let wrongQuestions = [];
 let retryMode = false;
@@ -74,11 +82,20 @@ function checkAnswer() {
   } else {
     feedbackElement.textContent = `❌ Incorrect! The correct answer is: "${chunks[currentQuestionIndex].english}"`;
     feedbackElement.style.color = "red";
-    wrongAnswers.push(chunks[currentQuestionIndex]);
+
+    // Add only if not already in wrongAnswers
+    if (
+      !wrongAnswers.some(
+        (item) => item.mandarin === chunks[currentQuestionIndex].mandarin
+      )
+    ) {
+      wrongAnswers.push(chunks[currentQuestionIndex]);
+    }
   }
 
   submitAnswerButton.disabled = true;
   nextQuestionButton.disabled = false;
+  nextQuestionButton.style.display = "inline-block";
 }
 
 function nextQuestion() {
@@ -128,22 +145,31 @@ function gameOver() {
 }
 
 function retryWrongQuestions() {
-  // Reset game state for retry
+  // Check if there are wrong questions to retry
+  if (wrongAnswers.length === 0) {
+    alert("✅ No wrong questions to retry! Returning to menu.");
+    window.location.href = "../menu/menu.html";
+    return;
+  }
+
+  // Prepare wrong questions to retry
   currentQuestionIndex = 0;
   score = 0;
-  wrongAnswers = []; // Clear the wrong answers after retry
   retryMode = true;
 
-  // Show the game container again and hide the summary
+  // Make a copy of wrongAnswers and replace chunks for retry
+  const wrongChunkCopy = [...wrongAnswers]; // Create a copy to avoid reference issues
+  chunks.length = 0; // Clear existing chunks
+  chunks.push(...wrongChunkCopy); // Load wrong answers into chunks
+  wrongAnswers = []; // Clear wrong answers after retrying
+
+  // Hide the summary and show game screen again
   summaryContainer.style.display = "none";
   questionElement.style.display = "block";
   document.getElementById("word-hint").style.display = "flex";
   submitAnswerButton.style.display = "inline-block";
   nextQuestionButton.style.display = "none"; // Hide until next question
-
-  // Set chunks to only wrong answers for retry
-  chunks.splice(0, chunks.length, ...wrongQuestions);
-  wrongQuestions = [];
+  tipButton.style.display = "inline-block";
 
   // Display the first wrong question
   displayQuestion();
